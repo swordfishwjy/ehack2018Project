@@ -1,0 +1,160 @@
+<!-- Author: Jianyu Wnag; Yang Huang; Hanqing Zhao
+Date: 03.04.2018
+Event: 2018 ehacks -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="description" content="description of your site" />
+    <meta name="author" content="author of the site" />
+    <title>Real Restaurant Rating</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lunbo.css" />
+    <link rel="stylesheet" href="css/toastr.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/toastr.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/modules/exporting.js"></script>
+    <script src="js/tagcanvas.min.js"></script>
+    <script src="js/lunbo.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        try {
+          TagCanvas.Start('myCanvas','tags',{
+            textColour: "null",
+			textFont: null,
+            outlineColour: '#64f560',
+            reverse: true,
+			textHeight: 25,
+            depth: 0.8,
+            maxSpeed: 0.05
+          });
+        } catch(e) {
+          // something went wrong, hide the canvas container
+          document.getElementById('myCanvasContainer').style.display = 'none';
+        }
+      };
+    </script>
+  </head>
+  <body>
+  <div id="in-nav">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <!-- <ul class="pull-right">
+              <li><a href="#settings.html">Setting</a></li>
+              <li><a href="#faq.html">FAQ</a></li>
+              <li><a href="#">SignUp</a></li>
+              <li><a href="login.html">LogIn</a></li>
+            </ul> --><a id="logo" href="index.html">
+              <h4>KNN-based <strong>Restaurant Rating</strong></h4></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="in-sub-nav">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul>
+              <li><a href="index.html" class="active"><i class="batch home"></i><br />
+Home</a></li>
+              <li><a href="rating.html"><i class="batch heatmap"></i><br />Rating</a></li>
+              <!-- <li><a href="trend.php"><i class="batch trend"></i><br />Trend</a></li> -->
+              <li><a href="compare.php"><i class="batch histogram"></i><br />Compare</a></li>
+              <!-- <li><a href="ranklist.php"><i class="batch Ranklist"></i><br />Ranklist</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="page">
+    <div class="page-container">
+    <div class="container">
+    <h4> Tag_Cloud</h4>
+    <hr>
+    <div id="myCanvasContainer">
+      <canvas width="500" height="500" p id="myCanvas">
+      </canvas>
+    </div>
+    <div id="tags">
+      <ul>      
+      <li><a href="http://localhost/website/" >male</a></li>
+      <li><a href="http://localhost/website/">female</a></li>
+      <li><a href="http://localhost/website/">sex</a></li>
+      <li></li>
+      <li><a href="http://localhost/website/">age</a></li>
+      <li><a href="http://localhost/website/">young</a></li>
+      <li><a href="http://localhost/website/">adult</a></li>
+      <li><a href="http://localhost/website/">old</a></li>
+      <li><a href="http://localhost/website/">personality</a></li>
+      <li><a href="http://localhost/website/">hardworking</a></li>
+      <li><a href="http://localhost/website/">conformist</a></li>
+      <li><a href="http://localhost/website/">interest</a></li>
+      <li><a href="http://localhost/website/">tech</a></li>
+      <li><a href="http://localhost/website/">business</a></li>
+      <li><a href="http://localhost/website/">education</a></li>
+      <li><a href="http://localhost/website/">budget</a></li>
+      <li><a href="http://localhost/website/">low</a></li>
+      <li><a href="http://localhost/website/">medium</a></li>
+      <li><a href="http://localhost/website/">high</a></li>
+      <li><a href="http://localhost/website/">weight</a></li>
+      <li><a href="http://localhost/website/">fat</a></li>
+      <li><a href="http://localhost/website/">normal</a></li>
+      <li><a href="http://localhost/website/">thin</a></li>
+      <li><a href="http://localhost/website/">race</a></li>
+      <li><a href="http://localhost/website/">American</a></li>
+      <li><a href="http://localhost/website/">Asian</a></li>
+      <li><a href="http://localhost/website/">African</a></li>  
+      <li><a href="http://localhost/website/">academy</a></li>  
+      <li><a href="http://localhost/website/">Bachelor</a></li>
+      <li><a href="http://localhost/website/">Master</a></li>  
+      <li><a href="http://localhost/website/">Doctor</a></li> 
+      <li><a href="http://localhost/website/">religion</a></li>  
+      <li><a href="http://localhost/website/">Catholic</a></li>
+      <li><a href="http://localhost/website/">Christian</a></li>  
+      </ul>
+   </div>
+       <div class="img"> <img src="Logo.png" alt="twitter" style="width:500px;height:560px;">
+    </div>
+    </div>
+      </div>
+      </div>
+    	<script type="text/javascript">
+(function() {
+  var delay;
+
+  delay = function(ms, func) {
+    return setTimeout(func, ms);
+  };
+
+  toastr.options = {
+    positionClass: 'toast-bottom-left'
+  };
+
+  delay(1000, function() {
+    return toastr.success('Welcome back to our system');
+  });
+
+}).call(this);
+</script>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <p>&copy; Copyright 2018 ehacks</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="js/d3-setup.js"></script><script>protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://'; address = protocol + window.location.host + window.location.pathname + '/ws'; socket = new WebSocket(address);
+socket.onmessage = function(msg) { msg.data == 'reload' && window.location.reload() }</script>
+</html>
+
